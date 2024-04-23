@@ -27,6 +27,20 @@ public class MathController {
 	
 	}
 	
+	@RequestMapping(value = "/subtraction/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double subtraction (@PathVariable(value = "numberOne") String numberOne,
+							   @PathVariable(value = "numberTwo") String numberTwo)
+	throws Exception{
+		
+	if(!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		throw new UnsupportedMathOperationException("Please set a numeric value!");
+	}
+	Double result = convertToDouble(numberOne) - convertToDouble(numberTwo);
+	
+	return convertToPositive(result);
+		
+	}
+	
 	private Double convertToDouble(String strNumber) {
 		if (strNumber == null) return 0D; //Double zerado
 		
@@ -41,4 +55,11 @@ public class MathController {
 		String number = strNumber.replaceAll(",", ".");
 		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
 	}
+	
+	private Double convertToPositive(Double result) {
+			if (result > 0) return result;
+			
+			return result * -1;
+}
+	
 }
