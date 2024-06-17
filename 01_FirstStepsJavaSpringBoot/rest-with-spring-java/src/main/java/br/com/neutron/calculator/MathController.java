@@ -41,6 +41,58 @@ public class MathController {
 		
 	}
 	
+	@RequestMapping(value = "/multiplication/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double multiplication (@PathVariable(value = "numberOne") String numberOne,
+							   	  @PathVariable(value = "numberTwo") String numberTwo)
+	throws Exception{
+		
+	if(!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		throw new UnsupportedMathOperationException("Please set a numeric value!");
+	}
+	Double result = convertToDouble(numberOne) * convertToDouble(numberTwo);
+	
+	return convertToPositive(result);
+		
+	}
+	
+	@RequestMapping(value = "/division/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double division (@PathVariable(value = "numberOne") String numberOne,
+							   	  @PathVariable(value = "numberTwo") String numberTwo)
+	throws Exception{
+		
+	if(!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		throw new UnsupportedMathOperationException("Please set a numeric value!");
+	}
+	Double result = convertToDouble(numberOne) / convertToDouble(numberTwo);
+	
+	return convertToPositive(result);
+		
+	}
+	
+	@RequestMapping(value = "/medium/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double medium (@PathVariable(value = "numberOne") String numberOne,
+					   @PathVariable(value = "numberTwo") String numberTwo)
+	throws Exception{
+	
+	if(!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		throw new UnsupportedMathOperationException("Please set a numeric value!");
+	}
+	return (convertToDouble(numberOne) + convertToDouble(numberTwo)) / 2;
+	
+	}
+	
+	@RequestMapping(value = "/squareRoot/{numberOne}", method=RequestMethod.GET)
+	public Double squareRoot (@PathVariable(value = "numberOne") String numberOne)
+	throws Exception{
+	
+	if(!isNumeric(numberOne)) {
+		throw new UnsupportedMathOperationException("Please set a numeric value!");
+	}
+	return Math.sqrt(convertToDouble(numberOne));
+	
+	}
+	
+	
 	private Double convertToDouble(String strNumber) {
 		if (strNumber == null) return 0D; //Double zerado
 		
