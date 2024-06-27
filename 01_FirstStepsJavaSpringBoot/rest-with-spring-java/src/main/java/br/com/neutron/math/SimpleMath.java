@@ -14,15 +14,12 @@ public class SimpleMath {
 		return NumberConverter.convertToPositive(result);
 		}
 	public Double multiplication (Double numberOne, Double numberTwo){
-		Double result = numberOne * numberTwo;
-		
-		return NumberConverter.convertToPositive(result);
+		return numberOne * numberTwo;
 		}
 	
 	public Double division (Double numberOne,Double numberTwo){
-		Double result = numberOne / numberTwo;
 		
-		return NumberConverter.convertToPositive(result);
+		return numberOne / numberTwo;
 		}
 	
 	public Double medium (Double numberOne, Double numberTwo){
