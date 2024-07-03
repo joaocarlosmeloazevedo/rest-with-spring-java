@@ -1,5 +1,8 @@
 package br.com.neutron.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+
 //import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,23 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.neutron.converters.NumberConverter;
-import br.com.neutron.exceptions.UnsupportedMathOperationException;
-import br.com.neutron.math.SimpleMath;
+import br.com.neutron.model.Person;
+import br.com.neutron.services.PersonServices;
 
 @RestController
+@RequestMapping("/person")
 public class PersonController {
 	
-	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method=RequestMethod.GET)
-	public Double sum (@PathVariable(value = "numberOne") String numberOne,
-					   @PathVariable(value = "numberTwo") String numberTwo)
-	throws Exception{
+	@Autowired //Instanciação da classe via Annotation AUTOWIRED.
+	private PersonServices service;
 	
-	if(!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
-		throw new UnsupportedMathOperationException("Please set a numeric value!");
+	@RequestMapping(value = "/{id}", 
+					method=RequestMethod.GET,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public Person findById (@PathVariable(value = "id") String id)throws Exception{
+		return service.findById(id);
 	}
-	return math.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
-	
-	}
-	
 }

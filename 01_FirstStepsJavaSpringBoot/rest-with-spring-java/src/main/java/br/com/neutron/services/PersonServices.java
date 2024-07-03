@@ -22,6 +22,6 @@ public class PersonServices {
 		person.setLastName("Azevedo");
 		person.setAddress("SP São Paulo");
 		person.setGender("Masculino");
-		return new Person();
+		return person;
 	}
 }
