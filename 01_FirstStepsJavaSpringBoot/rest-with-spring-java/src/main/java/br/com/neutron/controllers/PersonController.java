@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 //import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 //import org.springframework.web.bind.annotation.RequestParam;
@@ -35,4 +36,12 @@ public class PersonController {
 	public Person findById (@PathVariable(value = "id") String id)throws Exception{
 		return service.findById(id);
 	}
+	
+	@RequestMapping(value = "/{id}",
+			method=RequestMethod.POST,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public Person create (@RequestBody Person person)throws Exception{
+		return service.create(person);
+}
 }

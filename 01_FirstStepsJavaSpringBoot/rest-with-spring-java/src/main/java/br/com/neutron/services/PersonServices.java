@@ -49,4 +49,16 @@ public class PersonServices {
 		person.setGender("Gender: " + i);
 		return person;
 	}
+	
+	public Person create(Person person) {
+		logger.info("Creating one person");
+		
+		return person;
+	}
+	
+	public Person update(Person person) {
+		logger.info("Update one person");
+		
+		return person;
+	}
 }
