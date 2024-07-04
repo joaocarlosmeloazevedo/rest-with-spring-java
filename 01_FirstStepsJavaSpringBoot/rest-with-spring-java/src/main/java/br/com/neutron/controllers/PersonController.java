@@ -52,4 +52,10 @@ public class PersonController {
 	public Person update (@RequestBody Person person)throws Exception{
 		return service.update(person);
 	}
+	
+	@RequestMapping(value = "/{id}",
+			method=RequestMethod.DELETE)
+	public void delete (@RequestBody String id)throws Exception{
+		service.delete(id);
+	}
 }
