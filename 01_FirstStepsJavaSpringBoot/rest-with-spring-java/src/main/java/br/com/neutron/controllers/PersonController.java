@@ -1,5 +1,7 @@
 package br.com.neutron.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -18,10 +20,16 @@ import br.com.neutron.services.PersonServices;
 @RequestMapping("/person")
 public class PersonController {
 	
-	@Autowired //Instanciação da classe via Annotation AUTOWIRED.
+	@Autowired
 	private PersonServices service;
 	
-	@RequestMapping(value = "/{id}", 
+		@RequestMapping(method=RequestMethod.GET,
+						produces = MediaType.APPLICATION_JSON_VALUE)
+		public List<Person> findAll(){
+			return service.findAll();
+	}
+		
+	@RequestMapping(value = "/{id}",
 					method=RequestMethod.GET,
 					produces = MediaType.APPLICATION_JSON_VALUE)
 	public Person findById (@PathVariable(value = "id") String id)throws Exception{
